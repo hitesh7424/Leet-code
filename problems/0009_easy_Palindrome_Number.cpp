@@ -5,11 +5,11 @@ Easy
 8.6K
 2.4K
 Companies
-Given an integer x, return true if x is a 
+Given an integer x, return true if x is a
 palindrome
 , and false otherwise.
 
- 
+
 
 Example 1:
 
@@ -26,24 +26,57 @@ Example 3:
 Input: x = 10
 Output: false
 Explanation: Reads 01 from right to left. Therefore it is not a palindrome.
- 
+
 
 Constraints:
 
 -231 <= x <= 231 - 1
- 
+
 
 Follow up: Could you solve it without converting the integer to a string?
 
 */
-
 
 #include <iostream>
 
 class Solution
 {
 public:
-    bool isPalindrome(int x)
+    bool isPalindrome2(int x)
+    {
+        if (x < 0)
+        {
+            return 0;
+        }
+
+        int test = x;
+        int number_of_digits = 0;
+        while (test != 0)
+        {
+            number_of_digits++;
+            test /= 10;
+        }
+        int first_Half = x;
+        int second_Half = 0;
+
+        for (int i = 0; i < number_of_digits / 2; i++)
+        {
+            second_Half *= 10;
+            second_Half += first_Half % 10;
+            first_Half /= 10;
+        }
+
+        if ((number_of_digits % 2))
+        {
+            first_Half /= 10;
+        }
+
+        // std::cout << first_Half << std::endl;
+        // std::cout << second_Half << std::endl;
+        return (first_Half == second_Half);
+    }
+
+    bool isPalindrome1(int x)
     {
         if (x < 0)
         {
@@ -69,14 +102,8 @@ int main()
     std::cin >> x;
     Solution palindromeChecker;
 
-    std::cout << palindromeChecker.isPalindrome(x) << "\n";
+    std::cout << palindromeChecker.isPalindrome2(x) << "\n";
 
     return 0;
 }
 
-/*
-Line 14: Char 33: runtime error: signed integer overflow: 998765432 * 10 cannot be represented in type 'int' (solution.cpp)
-SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior prog_joined.cpp:23:33
-
-
-*/
