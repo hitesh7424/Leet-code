@@ -94,7 +94,7 @@ int main()
 
     vector<int> array;
     array = {3, 2, 3};
-    int target = 6; // output: [0,1]
+    int target = 6; // output: [0,2]
     vector<int> ans;
     ans = leet_Func.twoSum(array, target);
 
