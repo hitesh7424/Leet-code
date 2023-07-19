@@ -60,11 +60,11 @@ int main()
 
     if (ans.wordPattern(pattern, s))
     {
-        cout << "true\n";
+        cout << "True\n";
     }
     else
     {
-        cout << "false\n";
+        cout << "False\n";
     }
 
     return 0;
