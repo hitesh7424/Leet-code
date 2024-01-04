@@ -1,47 +1,74 @@
 #include <iostream>
-#include <string>
+#include <vector>
+
 using namespace std;
 
 class Solution
 {
 public:
-    string gcdOfStrings(string str1, string str2)
+    vector<bool> kidsWithCandies(vector<int> &candies, int extraCandies)
     {
-        if (str1 + str2 != str2 + str1)
+        int length = candies.size();
+        vector<bool> ans(length, false);
+
+        int max_candy = INT_MIN;
+        for (int candy:candies)
         {
-            return "";
+            max_candy = max(max_candy, candy);
+        }
+        for (size_t i = 0; i < length; i++)
+        {
+            ans[i] = (candies[i] + extraCandies >= max_candy);
         }
 
-        int length = gcd(str1.length(), str2.length());
-        return str1.substr(0, length);
-    }
-
-private:
-    int gcd(int a, int b)
-    {
-        while (b)
-        {
-            int temp = b;
-            b = a % b;
-            a = temp;
-        }
-        return a;
+        return ans;
     }
 };
 
-void testExample(const std::string &str1, const std::string &str2, const std::string &expected)
-{
-    Solution solution;
-    std::string result = solution.gcdOfStrings(str1, str2);
-    std::cout << "Input: \"" << str1 << "\", \"" << str2 << "\"    Result: \"" << result << "\"    Expected: \"" << expected << "\"" << std::endl;
-    std::cout << "Test Case: " << (result == expected ? "Passed" : "Failed") << "\n\n";
-}
-
 int main()
 {
-    testExample("ABCABC", "ABC", "ABC");
-    testExample("ABABAB", "ABAB", "AB");
-    testExample("LEET", "CODE", "");
+    Solution solution;
+
+    // Test Case 1
+    vector<int> candies1 = {2, 3, 5, 1, 3};
+    int extraCandies1 = 3;
+    vector<bool> result1 = solution.kidsWithCandies(candies1, extraCandies1);
+    cout << "Test Case 1 " << endl;
+    cout << "Result: [true, true, true, false, true]" << endl;
+    cout << "Actual Result: ";
+    for (bool val : result1)
+    {
+        cout << boolalpha << val << " ";
+    }
+    cout << endl
+         << endl;
+
+    // Test Case 2
+    vector<int> candies2 = {4, 2, 1, 1, 2};
+    int extraCandies2 = 1;
+    vector<bool> result2 = solution.kidsWithCandies(candies2, extraCandies2);
+    cout << "Test Case 2 " << endl;
+    cout << "Result: [true, false, false, false, false]" << endl;
+    cout << "Actual Result: ";
+    for (bool val : result2)
+    {
+        cout << boolalpha << val << " ";
+    }
+    cout << endl
+         << endl;
+
+    // Test Case 3
+    vector<int> candies3 = {12, 1, 12};
+    int extraCandies3 = 10;
+    vector<bool> result3 = solution.kidsWithCandies(candies3, extraCandies3);
+    cout << "Test Case 3 " << endl;
+    cout << "Result: [true, false, true]" << endl;
+    cout << "Actual Result: ";
+    for (bool val : result3)
+    {
+        cout << boolalpha << val << " ";
+    }
+    cout << endl;
 
     return 0;
 }
