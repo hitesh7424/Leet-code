@@ -1,2 +1,5 @@
-.cph\
-.exe
+*.exe
+.cph
+*.bin
+
+
